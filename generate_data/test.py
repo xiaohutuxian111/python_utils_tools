@@ -43,6 +43,6 @@ def countNum(str):
 
 
 # 函数调用
-data = read_file("./AdministrativeAreaCode.txt")
+data = read_file("AdministrativeAreaCode.json")
 
 
