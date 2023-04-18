@@ -13,4 +13,7 @@ class Settings():
         """初始化游戏设置"""
         self.screen_width = 800
         self.screen_height = 1200
-        self.bg_color = (233,230,230)
+        self.bg_color = (233, 230, 230)
+
+        # 飞船的设置
+        self.ship_speed_factor = 1.5

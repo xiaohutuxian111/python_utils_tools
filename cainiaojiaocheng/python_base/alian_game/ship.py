@@ -8,7 +8,7 @@ import pygame.image
 
 
 class Ship():
-    def __init__(self, screen):
+    def __init__(self, ai_settings, screen):
         """初始化飞船并设置初始位置"""
         self.screen = screen
 
@@ -20,6 +20,25 @@ class Ship():
         # 将每艘新的飞船放在屏幕的中央
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
+
+        # 移动标志
+        self.moving_right = False
+        self.moving_left = False
+
+        self.ai_settings = ai_settings
+        # 在飞船的属性center中存储最小的数值
+        self.center = float(self.rect.centerx)
+
+    def update(self):
+        """根据移动标志调整飞船位置"""
+        if self.moving_right:
+            # 更新飞船的center值，而不是rect
+            self.center += self.ai_settings.ship_speed_factor
+        if self.moving_left:
+            self.center -= self.ai_settings.ship_speed_factor
+
+        # 根据self.center 的位置更新 rect对象
+        self.rect.centerx = self.center
 
     def blitme(self):
         """在指定位置绘制飞船"""
