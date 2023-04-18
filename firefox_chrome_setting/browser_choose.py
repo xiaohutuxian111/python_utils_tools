@@ -1,9 +1,4 @@
-"""
-@FileName：browser_choose.py
-@Author：stone
-@Time：2023/4/1 11:22
-@Description：
-"""
+
 from selenium import webdriver
 
 
@@ -15,7 +10,7 @@ def firefox_setting():
     profile.set_preference("dom.webdriver.enabled", False)  # 设置非driver驱动
     profile.set_preference('useAutomationExtension', False)  # 关闭自动化提示
     profile.update_preferences()  # 更新设置
-    driver = webdriver.Firefox(firefox_options=options, firefox_profile=profile)
+    driver = webdriver.Firefox(firefox_options=options, firefox_profile=profile,log_path='D:\code\pythonCode\python_utils_tools\xlsutil')
     driver.maximize_window()
     return driver
 
@@ -47,4 +42,5 @@ def select_browser(browser_name="firefox"):
         return chrome_setting()
 
 if __name__ == '__main__':
-    pass
+    driver = select_browser()
+    driver.get("https://www.baidu.com")
