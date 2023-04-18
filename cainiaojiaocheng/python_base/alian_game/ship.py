@@ -31,10 +31,10 @@ class Ship():
 
     def update(self):
         """根据移动标志调整飞船位置"""
-        if self.moving_right:
+        if self.moving_right and  self.center<self.screen_rect.right-0.5*self.image.get_width():
             # 更新飞船的center值，而不是rect
             self.center += self.ai_settings.ship_speed_factor
-        if self.moving_left:
+        if self.moving_left and  self.center < self.screen_rect.left - 0.5*self.image.get_width():
             self.center -= self.ai_settings.ship_speed_factor
 
         # 根据self.center 的位置更新 rect对象
