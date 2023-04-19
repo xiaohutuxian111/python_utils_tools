@@ -12,7 +12,7 @@ class GameStats(object):
     def __init__(self, ai_settings):
         self.ai_settings = ai_settings
         self.reset_stats()
-        self.game_active = True
+        self.game_active = False
 
     def reset_stats(self):
         """初始化游戏运行过程中可能变化的信息"""
