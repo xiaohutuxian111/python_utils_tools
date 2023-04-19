@@ -31,6 +31,7 @@ class Settings():
         self.alien_drop_speed = 5
         # 外星人移动方向  1 为向右 -1为向左
         self.alien_direction =1
+        self.ship_limit = 3
 
 
 
