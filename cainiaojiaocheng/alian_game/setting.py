@@ -19,7 +19,7 @@ class Settings():
         self.ship_speed_factor = 1
 
         # 子弹设置
-        self.bullet_speed_factor = 0.5
+        self.bullet_speed_factor =  3
         self.bullet_width = 3
         self.bullet_height =15
         self.bullet_color = 60,60,60
@@ -28,7 +28,7 @@ class Settings():
         #  外星人设置
         self.alien_speed_factor = 1
         #  外星人下落速度
-        self.alien_drop_speed = 10
+        self.alien_drop_speed = 5
         # 外星人移动方向  1 为向右 -1为向左
         self.alien_direction =1
 
