@@ -73,17 +73,40 @@ def update_bullets(bullets):
             bullets.remove(bullet)
 
 
-def create_fleet(ai_settings, screen, aliens):
-    """创建外星人"""
+def create_fleet(ai_settings, screen, ship, aliens):
+    """创建外星人组"""
+    alien = Alien(ai_settings, screen)
+
+    alien_number_x = get_number_aliens_x(ai_settings, alien.rect.width)
+    alien_number_y = get_number_aliens_y(ai_settings, alien.rect.height, ship.rect.height)
+
+    # 创建一行外星人
+    for number_x in range(alien_number_x):
+        for number_y in range(alien_number_y):
+            create_alien(ai_settings, screen, aliens, number_x, number_y)
+
+
+def create_alien(ai_settings, screen, aliens, alien_number_x, alien_number_y):
+    """创建一个外星人"""
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
+    alien_height = alien.rect.height
+    alien.x = alien_width + alien_width * 2 * alien_number_x
+    alien.y = alien_height + alien_height * 2 * alien_number_y
+    alien.rect.x = alien.x
+    alien.rect.y = alien.y
+    aliens.add(alien)
+
+
+def get_number_aliens_y(ai_settings, alien_height, ship_height):
+    """计算外星人有多少行"""
+    available_space = ai_settings.screen_height - 3 * alien_height - ship_height
+    number_aliens_y = int(available_space / (2 * alien_height))
+    return number_aliens_y
+
+
+def get_number_aliens_x(ai_settings, alien_width):
+    """计算每一行有多少外杏仁"""
     available_space = ai_settings.screen_width - 2 * alien_width
-    print(available_space)
     number_aliens_x = int(available_space / (2 * alien_width))
-    print(number_aliens_x)
-    # 创建一行外星人
-    for alien_number in range(number_aliens_x):
-        alien = Alien(ai_settings, screen)
-        alien.x = alien_width + alien_width * 2 * alien_number
-        alien.rect.x = alien.x
-        aliens.add(alien)
+    return number_aliens_x
