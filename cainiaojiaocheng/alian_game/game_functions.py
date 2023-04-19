@@ -14,9 +14,9 @@ from alien import Alien
 
 def check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y, ship, aliens, bullets):
     """点击开始按钮事件"""
-    if play_button.rect.collidepoint(mouse_x, mouse_y):
+    button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
+    if button_clicked and not stats.game_active:
         stats.game_active = True
-
         # 重置游戏统计信息
         stats.reset_stats()
         stats.game_active = True
@@ -28,6 +28,8 @@ def check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y,
         create_fleet(ai_settings, screen, ship, aliens)
 
         ship.center_ship()
+        # 隐藏光标
+        pygame.mouse.set_visible(False)
 
 
 def check_events(ai_settings, screen, ship, aliens, bullets, play_button, stats):
@@ -150,6 +152,7 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         time.sleep(0.5)
     else:
         stats.game_active = False
+        pygame.mouse.set_visible(True)
 
 
 def change_fleet_direction(ai_settings, aliens):
