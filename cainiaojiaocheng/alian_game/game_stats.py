@@ -17,5 +17,4 @@ class GameStats(object):
     def reset_stats(self):
         """初始化游戏运行过程中可能变化的信息"""
         self.ship_limit = self.ai_settings.ship_limit
-
-
+        self.score = 0

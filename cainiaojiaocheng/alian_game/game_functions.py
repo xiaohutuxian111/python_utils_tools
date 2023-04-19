@@ -77,7 +77,7 @@ def fire_bullet(ai_settings, screen, ship, bullets):
         bullets.add(new_bullet)
 
 
-def update_screen(ai_settings, screen, stats, ship, bullets, aliens, play_button):
+def update_screen(ai_settings, screen, stats, ship, bullets, aliens, play_button,sb):
     """绘制屏幕操作"""
     # 设置背景色
     bg_color = ai_settings.bg_color
@@ -89,9 +89,12 @@ def update_screen(ai_settings, screen, stats, ship, bullets, aliens, play_button
     ship.blitme()
     # 绘制外星人
     aliens.draw(screen)
+
     #  如果游戏处于非活动的状态，则绘制按钮
     if not stats.game_active:
         play_button.draw_button()
+    #  显示得分
+    sb.show_score()
     #  让最近绘制的屏幕可见
     pygame.display.flip()
 
