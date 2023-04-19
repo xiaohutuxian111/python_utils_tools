@@ -49,7 +49,7 @@ def fire_bullet(ai_settings, screen, ship, bullets):
         bullets.add(new_bullet)
 
 
-def update_screen(ai_settings, screen, ship, bullets):
+def update_screen(ai_settings, screen, ship, bullets, alien):
     """绘制屏幕操作"""
     # 设置背景色
     bg_color = ai_settings.bg_color
@@ -59,6 +59,8 @@ def update_screen(ai_settings, screen, ship, bullets):
         bullet.draw_bullet()
     # 绘制飞船
     ship.blitme()
+    # 绘制外星人
+    alien.blitme()
     #  让最近绘制的屏幕可见
     pygame.display.flip()
 
