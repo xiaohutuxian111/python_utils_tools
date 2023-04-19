@@ -16,9 +16,11 @@ def check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y,
     """点击开始按钮事件"""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
-        stats.game_active = True
+
         # 重置游戏统计信息
         stats.reset_stats()
+        # 重置游戏设置
+        ai_settings.initialize_dynamic_settings()
         stats.game_active = True
         # 清空外星人和子弹
         bullets.empty()
@@ -99,11 +101,11 @@ def update_bullets(ai_settings, screen, ship, bullets, aliens):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
-    check_bullet_aliean_collision(ai_settings, screen, ship, aliens, bullets)
+    check_bullet_alien_collision(ai_settings, screen, ship, aliens, bullets)
     bullets.update()
 
 
-def check_bullet_aliean_collision(ai_settings, screen, ship, aliens, bullets):
+def check_bullet_alien_collision(ai_settings, screen, ship, aliens, bullets):
     """检测子弹与飞船的碰撞"""
     # 检查是否有子弹击中了外星人
     # 存在直接删除子弹和外新人
@@ -111,6 +113,7 @@ def check_bullet_aliean_collision(ai_settings, screen, ship, aliens, bullets):
     if len(aliens) == 0:
         # 删除所有的子弹新建一群外星人
         bullets.empty()
+        ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)
 
 

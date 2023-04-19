@@ -32,3 +32,23 @@ class Settings():
         # 外星人移动方向  1 为向右 -1为向左
         self.alien_direction = 1
         self.ship_limit = 3
+
+        # 以什么速度提高游戏节奏
+        self.speedup_scale = 1, 1
+
+        self.initialize_dynamic_settings()
+
+    def initialize_dynamic_settings(self):
+        """初始化游戏进行变量的设置"""
+        self.ship_speed_factor = 1.5
+        self.bullet_speed_factor = 3
+        self.alien_speed_factor = 1
+
+        # 表示移动的方向 1向右 -1向左
+        self.fleet_direction = 1
+
+    def increase_speed(self):
+        """提高游戏设置"""
+        self.ship_speed_factor *= self.speedup_scale
+        self.bullet_speed_factor *= self.speedup_scale
+        self.alien_speed_factor *= self.speedup_scale
