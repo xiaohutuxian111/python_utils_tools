@@ -12,13 +12,16 @@ from bullet import Bullets
 from alien import Alien
 
 
-def check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y, ship, aliens, bullets):
+def check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y, ship, aliens, bullets,sb):
     """点击开始按钮事件"""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
         # 重置游戏统计信息
         stats.reset_stats()
         # 重置游戏设置
+        sb.prep_score()
+        sb.prep_high_score()
+        sb.prep_level()
         ai_settings.initialize_dynamic_settings()
         stats.game_active = True
         # 清空外星人和子弹
@@ -33,7 +36,7 @@ def check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y,
         pygame.mouse.set_visible(False)
 
 
-def check_events(ai_settings, screen, ship, aliens, bullets, play_button, stats):
+def check_events(ai_settings, screen, ship, aliens, bullets, play_button, stats,sb):
     """响应按键和鼠标事件"""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -44,7 +47,7 @@ def check_events(ai_settings, screen, ship, aliens, bullets, play_button, stats)
             check_keydown_events(event, ship, ai_settings, screen, bullets)
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y, ship, aliens, bullets)
+            check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y, ship, aliens, bullets,sb)
 
 
 def check_keyup_events(event, ship):
@@ -128,6 +131,9 @@ def check_bullet_alien_collision(ai_settings, screen, ship, aliens, bullets, sta
         # 删除所有的子弹新建一群外星人
         bullets.empty()
         ai_settings.increase_speed()
+        # 消灭完所有外星人,提高等级
+        stats.level +=1
+        sb.prep_level()
         create_fleet(ai_settings, screen, ship, aliens)
 
 

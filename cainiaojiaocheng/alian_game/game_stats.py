@@ -14,6 +14,7 @@ class GameStats(object):
         self.reset_stats()
         self.game_active = False
         self.high_score = 0
+        self.level = 1
 
     def reset_stats(self):
         """初始化游戏运行过程中可能变化的信息"""
