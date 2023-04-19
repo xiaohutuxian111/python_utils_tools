@@ -38,7 +38,7 @@ def check_keydown_events(event, ship, ai_settings, screen, bullets):
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
         fire_bullet(ai_settings, screen, ship, bullets)
-    elif event.key == pygame.K_Q:
+    elif event.key == pygame.K_F2:
         sys.exit()
 
 
@@ -72,6 +72,30 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
+    bullets.update()
+
+
+def update_aliens(ai_settings,aliens):
+    """跟新外星人位置"""
+    # 检查是否有外星人在边缘
+    check_feet_edges(ai_settings,aliens)
+    aliens.update()
+
+
+def change_fleet_direction(ai_settings, aliens):
+    """将外星人下移，并改变方向"""
+    for alien in aliens.sprites():
+        alien.rect.y += ai_settings.alien_drop_speed
+    ai_settings.alien_direction *=-1
+
+
+
+def check_feet_edges(ai_settings,aliens):
+    """有外星人到达边缘时执行相应措施"""
+    for  alien in aliens.sprites():
+        if alien.check_edges():
+            change_fleet_direction(ai_settings,aliens)
+            break
 
 def create_fleet(ai_settings, screen, ship, aliens):
     """创建外星人组"""

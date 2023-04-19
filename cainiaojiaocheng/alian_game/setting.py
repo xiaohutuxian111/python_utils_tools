@@ -25,6 +25,16 @@ class Settings():
         self.bullet_color = 60,60,60
         self.bullet_allowed = 3
 
+        #  外星人设置
+        self.alien_speed_factor = 1
+        #  外星人下落速度
+        self.alien_drop_speed = 10
+        # 外星人移动方向  1 为向右 -1为向左
+        self.alien_direction =1
+
+
+
+
 
 
 
