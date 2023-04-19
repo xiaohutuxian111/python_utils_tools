@@ -19,11 +19,14 @@ def run_game():
     pygame.display.set_caption("Alien  Invation")
     ai_settings = Settings()
     pygame.init()
-    screen = pygame.display.set_mode((ai_settings.screen_height, ai_settings.screen_width))
+    screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     ship = Ship(ai_settings, screen)
-    alien =  Alien(ai_settings,screen)
     # 创建一个用于子弹的编组
     bullets = Group()
+    # 创建外星人人人群
+    aliens = Group()
+    gf.create_fleet(ai_settings,screen,aliens)
+
 
     # 开始游戏的主循环
     while True:
@@ -32,7 +35,7 @@ def run_game():
         ship.update()
         bullets.update()
         gf.update_bullets(bullets)
-        gf.update_screen(ai_settings, screen, ship, bullets,alien)
+        gf.update_screen(ai_settings, screen, ship, bullets,aliens)
 
 
 run_game()
