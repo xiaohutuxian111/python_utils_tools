@@ -22,6 +22,8 @@ def check_play_button(ai_settings, stats, screen, play_button, mouse_x, mouse_y,
         sb.prep_score()
         sb.prep_high_score()
         sb.prep_level()
+        sb.prep_ships()
+
         ai_settings.initialize_dynamic_settings()
         stats.game_active = True
         # 清空外星人和子弹
@@ -137,16 +139,16 @@ def check_bullet_alien_collision(ai_settings, screen, ship, aliens, bullets, sta
         create_fleet(ai_settings, screen, ship, aliens)
 
 
-def check_alien_bottom(ai_settings, stats, screen, ship, aliens, bullets):
+def check_alien_bottom(ai_settings, stats, screen, ship, aliens, bullets,sb):
     """检查是否有外星人到达屏幕的低端"""
     screen_rect = screen.get_rect()
     for alien in aliens.sprites():
         if alien.rect.bottom >= screen_rect.bottom:
-            ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+            ship_hit(ai_settings, stats, screen, ship, aliens, bullets,sb)
             break
 
 
-def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
+def update_aliens(ai_settings, stats, screen, ship, aliens, bullets,sb):
     """跟新外星人位置"""
     # 检查是否有外星人在边缘
     if stats.game_active:
@@ -157,13 +159,15 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
             print("ship hit!")
             ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
         # 检查外星人是否有到达底端
-        check_alien_bottom(ai_settings, stats, screen, ship, aliens, bullets)
+        check_alien_bottom(ai_settings, stats, screen, ship, aliens, bullets,sb)
 
 
-def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+def ship_hit(ai_settings, stats, screen, ship, aliens, bullets,sb):
     """相应外星人碰飞穿"""
     if stats.ship_limit > 0:
         stats.ship_limit -= 1
+        #更新记分牌
+        sb.prep_ships()
 
         # 清空外星人列表和子弹列表
         aliens.empty()

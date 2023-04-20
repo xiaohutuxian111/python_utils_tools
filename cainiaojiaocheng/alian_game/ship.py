@@ -5,11 +5,12 @@
 @Description:飞船类
 """
 import pygame.image
+from pygame.sprite import  Sprite
 
-
-class Ship():
+class Ship(Sprite):
     def __init__(self, ai_settings, screen):
         """初始化飞船并设置初始位置"""
+        super().__init__()
         self.screen = screen
 
         # 加载飞船图像并获取外接矩形

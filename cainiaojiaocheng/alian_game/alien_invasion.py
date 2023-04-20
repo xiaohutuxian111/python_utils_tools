@@ -37,7 +37,7 @@ def run_game():
         # 实时监控鼠标键盘事件
         gf. check_events(ai_settings, screen, ship, aliens, bullets, play_button, stats,sb)
         ship.update()
-        gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
+        gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets,sb)
         gf.update_bullets(ai_settings, screen, ship, bullets, aliens,stats,sb)
         gf.update_screen(ai_settings, screen, stats, ship, bullets, aliens, play_button,sb)
 
